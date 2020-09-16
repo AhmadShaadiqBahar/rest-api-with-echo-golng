@@ -1,0 +1,7 @@
+{
+    "DB_USERNAME" :"root",
+    "DB_PASSWORD" :"keepsmile",
+
+    "DB_HOST" : "localhost",
+    "DB_NAME" :"echo-rest"
+}

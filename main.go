@@ -1,8 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"github.com/AhmadShaadiqBahar/rest-api-with-echo-golng/db"
+	"github.com/AhmadShaadiqBahar/rest-api-with-echo-golng/routes"
+)
 
 func main() {
-	fmt.Println("shaadiq")
+	db.Init()
+	e := routes.Init()
+
+	e.Logger.Fatal(e.Start(":8080"))
 
 }
