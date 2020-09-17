@@ -4,13 +4,14 @@ import (
 	"net/http"
 
 	"github.com/AhmadShaadiqBahar/rest-api-with-echo-golng/db"
+	validator "github.com/go-playground/validator"
 )
 
 type Pegawai struct {
 	Id     int    `json:"id"`
-	Nama   string `json:"nama"`
-	Alamat string `json:"alamat"`
-	Telpon string `json:"telepon"`
+	Nama   string `json:"nama" validate:"required"`
+	Alamat string `json:"alamat" validate:"required"`
+	Telpon string `json:"telepon" validate:"required"`
 }
 
 func FetchAllPegawai() (Response, error) {
@@ -46,6 +47,19 @@ func FetchAllPegawai() (Response, error) {
 
 func StorePegawai(nama string, alamat string, telpon string) (Response, error) {
 	var res Response
+
+	v := validator.New()
+
+	peg := Pegawai{
+		Nama:   nama,
+		Alamat: alamat,
+		Telpon: telpon,
+	}
+
+	err := v.Struct(peg)
+	if err != nil {
+		return res, err
+	}
 
 	con := db.CreateCon()
 
